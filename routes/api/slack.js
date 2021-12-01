@@ -46,7 +46,7 @@ router.post('/slack', async (request, response) => {
                 + "\n-------------------------------------\n"}
             await axios({
                 method: 'post',
-                url: currenturl,
+                url: currenturl.trim(),
                 data: slackData,
                 })
                 .then((res) => {
