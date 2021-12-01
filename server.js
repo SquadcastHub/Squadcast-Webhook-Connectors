@@ -26,6 +26,8 @@ const trelloRouter = require("./routes/api/trello");
 app.use('/squadcast/connector', trelloRouter);
 const clickUpRouter = require("./routes/api/clickUp");
 app.use('/squadcast/connector', clickUpRouter);
+const discordRouter = require("./routes/api/discord");
+app.use('/squadcast/connector', discordRouter);
 if( process.env.telegram_bot_start.toLowerCase() == "yes") {
     const telegramRouter = require("./routes/api/telegram");
     app.use('/squadcast/connector', telegramRouter);

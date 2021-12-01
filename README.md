@@ -4,10 +4,11 @@
 This repository contains the code for the Squadcast Webhook Connectors and is intended to be used along with Event Hooks.
 The repository supports : 
 1. Slack
-2. Trello
-3. Telegram
+2. Discord
+3. Trello
 4. Click Up
-5. Email
+5. Telegram
+6. Email
 
 
 ## Prerequisites
@@ -45,6 +46,15 @@ nodemon start
 Request Headers :- 
 * Slack URL can support multiple channels. To notify channels, just put integers as name of Key value pair & value should be the Slack Webhook. Eg. :
 ![image](assets/slack.png)
+
+### Discord
+----
+
+> URL : https://Server-IP-Address:5000/squadcast/connector/discord
+
+Request Headers :- 
+* Discord URL can support multiple channels. To notify channels, just put integers as name of Key value pair & value should be the Discord Webhook. Eg. :
+![image](assets/discord.png)
 
 ### Trello
 ----
