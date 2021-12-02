@@ -21,27 +21,26 @@ router.post('/discord', async (request, response) => {
     var count = 1;
     var resp = "";
     var title = "";
+    url = "https://app.squadcast.com/incident/" + request.body.id
     if (request.body.event_type == "incident_resolved") {
-        title = "#" + request.body.id + " - **Resolved**"+"\n"+"https://app.squadcast.com/incident/" + request.body.id
+        title = "**Resolved **"+"[**#"+request.body.id+"**]("+url+")\n"
     }
     else if (request.body.event_type == "incident_reassigned") {
-        title = "#" + request.body.id + " - **Reassigned**"+"\n"+"https://app.squadcast.com/incident/" + request.body.id
+        title = "**Reassigned **"+"[**#"+request.body.id+"**]("+url+")\n"
     }
     else if (request.body.event_type == "incident_acknowledged") {
-        title = "#" + request.body.id + " - **Acknowledged**"+"\n"+"https://app.squadcast.com/incident/" + request.body.id
+        title = "**Acknowledged **"+"[**#"+request.body.id+"**]("+url+")\n"
     }
     else if (request.body.event_type == "incident_triggered") {
-        title = "#" + request.body.id + " - **Triggered**"+"\n"+"https://app.squadcast.com/incident/" + request.body.id
+        title = "**Triggered **"+"[**#"+request.body.id+"**]("+url+")\n"
     }
     while(true){
         currenturl = request.header(count.toString());
         if (currenturl !== undefined) {
             var discordData = {
-                "content": title,
-                "tts": false,
                 "embeds": [{
-                  "title": request.body.message,
-                  "description": "**Incident State** : " + request.body.status + "\n" 
+                  "description": (title+request.body.message).replace(/\n+/g, "\n")
+                  +"\n\n**Incident State** : " + request.body.status + "\n" 
                   + "**Service Name** : " + request.body.service.name + "\n"
                   + "**Alert soure** : " + request.body.alert_source.type + "\n\n"
                   + "**Description** : " + request.body.description + "\n"
