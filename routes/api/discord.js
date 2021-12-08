@@ -19,26 +19,30 @@ router.post('/discord', async (request, response) => {
         return response.status(400).json(errorResponse("Bad Request, Discord URL not found"));
     }
     var count = 1;
-    var resp = "";
-    var title = "";
+    var resp = title = color = "";
     url = "https://app.squadcast.com/incident/" + request.body.id
     if (request.body.event_type == "incident_resolved") {
-        title = "**Resolved **"+"[**#"+request.body.id+"**]("+url+")\n"
+        title = "**Resolved **"+"[**#"+request.body.id+"**]("+url+")\n";
+        color = "2219410";
     }
     else if (request.body.event_type == "incident_reassigned") {
-        title = "**Reassigned **"+"[**#"+request.body.id+"**]("+url+")\n"
+        title = "**Reassigned **"+"[**#"+request.body.id+"**]("+url+")\n";
+        color = "10027238";
     }
     else if (request.body.event_type == "incident_acknowledged") {
-        title = "**Acknowledged **"+"[**#"+request.body.id+"**]("+url+")\n"
+        title = "**Acknowledged **"+"[**#"+request.body.id+"**]("+url+")\n";
+        color = "14804480";
     }
     else if (request.body.event_type == "incident_triggered") {
-        title = "**Triggered **"+"[**#"+request.body.id+"**]("+url+")\n"
+        title = "**Triggered **"+"[**#"+request.body.id+"**]("+url+")\n";
+        color = "10027238";
     }
     while(true){
         currenturl = request.header(count.toString());
         if (currenturl !== undefined) {
             var discordData = {
                 "embeds": [{
+                  "color" : color,
                   "description": (title+request.body.message).replace(/\n+/g, "\n")
                   +"\n\n**Incident State** : " + request.body.status + "\n" 
                   + "**Service Name** : " + request.body.service.name + "\n"
