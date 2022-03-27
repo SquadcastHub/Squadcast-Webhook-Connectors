@@ -29,6 +29,7 @@
     "nodemailer": "^6.7.1",
     "nodemon": "^2.0.15",
     "properties-reader": "^2.2.0",
+    "uuid": "^8.3.2",
     "winston": "^3.3.3"
   }
 }

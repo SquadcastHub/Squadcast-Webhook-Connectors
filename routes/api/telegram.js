@@ -1,6 +1,7 @@
 
 // IMPORTS
 const axios = require("axios");
+const authV1 = require("../../middlewares/v1/auth");
 // UTILITIES
 const logger = require("../../util/logger/loggerUtil");
 const { errorResponse, successResponse } = require("../../util/response/responseUtil");
@@ -10,7 +11,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const bot = new TelegramBot(process.env.telegram_bot_token, {polling: true});
 
 // Telegram Bot API
-router.post('/telegram', async (request, response) => {
+router.post('/telegram',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
     if ((!request.body.message) && (!request.body.description) && (!request.body.status)) {
         logger.error("Bad Request, Message, Description or id not found");

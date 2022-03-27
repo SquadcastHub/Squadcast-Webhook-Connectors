@@ -17,6 +17,10 @@ const options = {
     cert: fs.readFileSync("./certs/public-cert.pem")
 };
 
+// AUTH KEY GENERATION
+const authV1 = require("./middlewares/v1/auth");
+console.log("\nauthKey : "+authV1.generate());
+
 // ROUTES
 const slackRouter = require("./routes/api/slack");
 app.use('/squadcast/connector', slackRouter);
@@ -35,6 +39,7 @@ if( process.env.telegram_bot_start.toLowerCase() == "yes") {
 
 // HTTPS SERVER
 const port = process.env.PORT;
-https.createServer(options, app).listen(port, () => {
-    console.log("Squadcast - Webhooks - Connectors - HTTPS Server is running on port:" + port);
-});
+app.listen(port);
+// https.createServer(options, app).listen(port, () => {
+//     console.log("Squadcast - Webhooks - Connectors - HTTPS Server is running on port:" + port);
+// });

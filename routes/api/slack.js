@@ -1,6 +1,7 @@
 
 // IMPORTS
 const axios = require("axios");
+const authV1 = require("../../middlewares/v1/auth");
 // UTILITIES
 const logger = require("../../util/logger/loggerUtil");
 const { errorResponse, successResponse } = require("../../util/response/responseUtil");
@@ -8,7 +9,7 @@ const { errorResponse, successResponse } = require("../../util/response/response
 const router = require("express").Router();
 
 // Slack channel API
-router.post('/slack', async (request, response) => {
+router.post('/slack',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
     if ((!request.body.message) && (!request.body.description) && (!request.body.status) && (!request.body.id)) {
         logger.error("Bad Request, Message, Description, Status or id not found");

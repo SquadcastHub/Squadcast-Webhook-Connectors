@@ -1,6 +1,7 @@
 
 // IMPORTS
 const axios = require("axios");
+const authV1 = require("../../middlewares/v1/auth");
 // UTILITIES
 const logger = require("../../util/logger/loggerUtil");
 const { errorResponse, successResponse } = require("../../util/response/responseUtil");
@@ -9,7 +10,7 @@ const router = require("express").Router();
 var nodemailer = require('nodemailer');
 
 // Email API
-router.post('/email', async (request, response) => {
+router.post('/email',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
     if ((!request.body.message) && (!request.body.description) && (!request.body.status)) {
         logger.error("Bad Request, Message, Description or id not found");

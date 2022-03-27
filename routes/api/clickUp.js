@@ -1,6 +1,7 @@
 
 // IMPORTS
 const axios = require("axios");
+const authV1 = require("../../middlewares/v1/auth");
 // UTILITIES
 const logger = require("../../util/logger/loggerUtil");
 const { errorResponse, successResponse } = require("../../util/response/responseUtil");
@@ -8,7 +9,7 @@ const { errorResponse, successResponse } = require("../../util/response/response
 const router = require("express").Router();
 
 // Create TASK API
-router.post('/clickup', async (request, response) => {
+router.post('/clickup',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
     if ((!request.body.message) && (!request.body.description) (!request.body.id)) {
         logger.error("Bad Request, Message, Description or id not found");

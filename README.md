@@ -20,6 +20,14 @@ The repository supports :
 bash dependencies.sh
 ```
 
+## Authentication
+
+Squadcast Webhook Connectors has authentication built-in. Once the Node Server is up and running, an authKey will be provided. Users need to add `authKey` in the headers section of the Squadcast's Outgoing Webhooks.
+
+![image](assets/auth.png)
+
+![image](assets/auth-sq.png)
+
 ## Getting Started
  - Clone this repo
 ```sh
