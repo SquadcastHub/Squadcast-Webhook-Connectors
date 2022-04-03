@@ -31,7 +31,8 @@ Inside the .env file, users need to define the `authKey` and change the `useAuth
 * Auto generated authKey :-
 Once the Node Server is up and running, an `authKey` will be provided.
 ![image](assets/auth.png)
-***Note** : Make sure that inside the .env file, `useAuthKey` variable’s value is “no”*
+
+    ***Note** : Make sure that inside the .env file, `useAuthKey` variable’s value is “no”*
 
 Users need to add `authKey` in the headers section of the Squadcast's Outgoing Webhooks. Eg. :
 ![image](assets/auth-sq.png)
