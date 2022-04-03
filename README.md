@@ -22,10 +22,18 @@ bash dependencies.sh
 
 ## Authentication
 
-Squadcast Webhook Connectors has authentication built-in. Once the Node Server is up and running, an authKey will be provided. Users need to add `authKey` in the headers section of the Squadcast's Outgoing Webhooks. Eg. :
+Squadcast Webhook Connectors has authentication built-in. Users can choose between a user defined authKey or an automatically generated authKey.
 
+* User Defined authKey :-
+Inside the .env file, users need to define the `authKey` and change the `useAuthKey` variable’s value to “yes”.
+![image](assets/auth-env.png)
+
+* Auto generated authKey :-
+Once the Node Server is up and running, an `authKey` will be provided.
 ![image](assets/auth.png)
+***Note** : Make sure that inside the .env file, `useAuthKey` variable’s value is “no”*
 
+Users need to add `authKey` in the headers section of the Squadcast's Outgoing Webhooks. Eg. :
 ![image](assets/auth-sq.png)
 
 ## Getting Started
