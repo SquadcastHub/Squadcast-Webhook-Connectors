@@ -20,7 +20,12 @@ auth = async (request, response, next) => {
 }
 
 generate = () => { 
-    authKey = uuidv4();
+    if( process.env.useAuthKey.toLowerCase() == "yes") {
+        authKey = process.env.authKey;
+    }
+    else {
+        authKey = uuidv4();
+    }
     return authKey;
 }
 
