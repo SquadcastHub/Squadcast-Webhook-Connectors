@@ -21,6 +21,7 @@
   "author": "Akash Singh",
   "license": "ISC",
   "dependencies": {
+    "@linear/sdk": "^1.22.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

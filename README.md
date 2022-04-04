@@ -7,8 +7,9 @@ The repository supports :
 2. Discord
 3. Trello
 4. Click Up
-5. Telegram
-6. Email
+5. Linear
+6. Telegram
+7. Email
 
 
 ## Prerequisites
@@ -86,6 +87,17 @@ Request Headers :-
 * ![image](assets/idList-example.png)
 * Tip : To get you own token & key, navigate to : https://trello.com/app-key
 
+### Linear
+----
+
+> URL : https://Server-IP-Address:5000/squadcast/connector/linear
+
+Request Headers :- 
+* Inside the .env file, users need to define the `linearAPIKey` and change the `initializeLinearClient` variable’s value to “yes”.
+![image](assets/linear-env.png)
+
+* To use the Linear webhook, just paste the URL mentioned above in Squadcast Webhook URl box. Additionally, users can also define `priority` for the issues. 1 is Urgent, 2 is High, 3 is Medium & 4 is Low. Eg. : 
+![image](assets/linear.png)
 
 ### Telegram
 ----
