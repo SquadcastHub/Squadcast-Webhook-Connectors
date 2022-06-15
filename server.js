@@ -32,6 +32,8 @@ const clickUpRouter = require("./routes/api/clickUp");
 app.use('/squadcast/connector', clickUpRouter);
 const discordRouter = require("./routes/api/discord");
 app.use('/squadcast/connector', discordRouter);
+const jenkinsRouter = require("./routes/api/jenkins");
+app.use('/squadcast/connector', jenkinsRouter);
 if( process.env.initializeLinearClient.toLowerCase() == "yes") {
     const linearRouter = require("./routes/api/linear");
     app.use('/squadcast/connector', linearRouter);
