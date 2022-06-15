@@ -177,3 +177,18 @@ List of SMTP Providers Supported : -
 "Yandex"
 "Zoho"
 "qiye.aliyun"
+
+---
+---
+---
+
+## Other Use Cases
+
+### Rapid7 InsightIDR - Reassign Incident
+----
+
+> URL : https://Server-IP-Address:5000/squadcast/connector/update-escalation/rapid7
+
+Request Headers :- 
+* Rapid7 InsightIDR URL supports Reassigning of an incident based on the Priority. In the headers, just add "region", "x-refresh-token", "reassignId" & "reassignType" and their proper values. Eg. : 
+![image](assets/rapid7.png)

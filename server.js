@@ -40,6 +40,8 @@ if( process.env.telegram_bot_start.toLowerCase() == "yes") {
     const telegramRouter = require("./routes/api/telegram");
     app.use('/squadcast/connector', telegramRouter);
 }
+const rapid7Router = require("./routes/api/rapid7");
+app.use('/squadcast/connector/update-escalation', rapid7Router);
 
 // HTTPS SERVER
 const port = process.env.PORT;
