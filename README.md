@@ -191,6 +191,6 @@ List of SMTP Providers Supported : -
 
 Request Headers :- 
 * Rapid7 InsightIDR URL supports Reassigning of an incident based on the Priority. In the headers, just add "region", "x-refresh-token", "reassignId" & "reassignType" and their proper values. Eg. : 
-![image](assets/rapid7.png)
+![image](assets/rapid7-insightidr.png)
 
 * Tip : To get you own "x-api-key", go to Settings > API Keys > User Key > New User Key 
