@@ -21,21 +21,22 @@ router.post('/rapid7',authV1.auth, async (request, response) => {
     }
     var token = "";
     await axios({
-      method: 'post',
+      method: 'get',
       url: "https://"+request.header("region")+".api.insight.rapid7.com/idr/v2/investigations/"+request.body.event_payload.investigationId,
       headers:{
-        "Accept-version" : "investigations-preview"
+        "Accept-version" : "investigations-preview",
+        "X-Api-Key" : request.header("x-api-key")
       }
       })
       .then((res) => {
           //HANDLE SUCCESS
           var priority = res.data.priority;
           console.log("Priority : "+ priority);
-          if ( (priority != "CRITICAL") || (priority != "HIGH")) {
+          if ( (priority !== "CRITICAL") && (priority !== "HIGH")) {
             logger.info("Returned Response - Investigation Priority Low");
             return response.status(200).json(successResponse("Returned Response - Investigation Priority Low",res.data));
           }
-          await axios({
+          axios({
             method: 'get',
             url: "https://auth.squadcast.com/oauth/access-token",
             headers:{
@@ -45,7 +46,7 @@ router.post('/rapid7',authV1.auth, async (request, response) => {
             .then((resp) => {
                 //HANDLE SUCCESS
                 token = resp.data.data.access_token;
-                await axios({
+                axios({
                     method: 'put',
                     url: "https://api.squadcast.com/v3/incidents/"+request.body.id+"/tags",
                     headers: {"Authorization" : `Bearer ${token}`},
@@ -59,8 +60,8 @@ router.post('/rapid7',authV1.auth, async (request, response) => {
                     }
                     })
                     .then((responseData) => {
-                        await axios({
-                            method: 'put',
+                        axios({
+                            method: 'post',
                             url: "https://api.squadcast.com/v3/incidents/"+request.body.id+"/reassign",
                             headers: {"Authorization" : `Bearer ${token}`},
                             data: {
