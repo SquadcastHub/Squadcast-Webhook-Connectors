@@ -65,8 +65,10 @@ router.post('/rapid7',authV1.auth, async (request, response) => {
                             url: "https://platform-backend.squadcast.com/v2/organizations/"+request.body.organization.id+"/incidents/"+request.body.id+"/reassign",
                             headers: {"Authorization" : `Bearer ${token}`},
                             data: {
-                                "id": request.header("reassignId"),
-                                "type": request.header("reassignType")
+                                "reassignTo": {
+                                    "id": request.header("reassignId"),
+                                    "type": request.header("reassignType")
+                                }
                             }
                             })
                             .then((respData) => {
