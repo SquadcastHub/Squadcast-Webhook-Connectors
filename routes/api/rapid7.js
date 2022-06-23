@@ -62,7 +62,7 @@ router.post('/rapid7',authV1.auth, async (request, response) => {
                     .then((responseData) => {
                         axios({
                             method: 'post',
-                            url: "https://api.squadcast.com/v3/incidents/"+request.body.id+"/reassign",
+                            url: "https://platform-backend.squadcast.com/v2/organizations/"+request.body.organization.id+"/incidents/"+request.body.id+"/reassign",
                             headers: {"Authorization" : `Bearer ${token}`},
                             data: {
                                 "id": request.header("reassignId"),
