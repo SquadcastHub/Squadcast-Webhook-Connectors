@@ -26,11 +26,13 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "form-data": "^4.0.0",
     "node-telegram-bot-api": "^0.54.0",
     "nodemailer": "^6.7.1",
     "nodemon": "^2.0.15",
     "properties-reader": "^2.2.0",
     "uuid": "^8.3.2",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "zulip-js": "^2.0.9"
   }
 }

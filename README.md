@@ -9,7 +9,8 @@ The repository supports :
 4. Click Up
 5. Linear
 6. Telegram
-7. Email
+7. Zulip
+8. Email
 
 
 ## Prerequisites
@@ -98,6 +99,17 @@ Request Headers :-
 
 * To use the Linear webhook, just paste the URL mentioned above in Squadcast Webhook URl box. Additionally, users can also define `priority` for the issues. 1 is Urgent, 2 is High, 3 is Medium & 4 is Low. Eg. : 
 ![image](assets/linear.png)
+
+### Zulip
+----
+
+> URL : https://Server-IP-Address:5000/squadcast/connector/zulip
+
+Steps :-
+* `Important` : Before starting, create your own Zulip Bot. Then add the bot in the respective organisation and Streams. Eg. : 
+![image](assets/zulip_bot.png)
+* To notify Stream and create a topic, just paste the URL mentioned above in Squadcast Webhook URl box. In the headers, just add the BOT EMAIL as "username", BOT API KEY as "password" & add the name of the STREAM as "stream". Eg. : 
+* ![image](assets/zulip.png)
 
 ### Telegram
 ----
