@@ -8,7 +8,7 @@ const { errorResponse, successResponse } = require("../../util/response/response
 // ROUTER INITIALIZATION
 const router = require("express").Router();
 
-// Create Card API
+// Change Escalation Policy API
 router.post('/rapid7',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
     if ((!request.body.message) && (!request.body.description) && (!request.body.status)) {

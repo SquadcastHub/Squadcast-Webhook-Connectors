@@ -10,7 +10,7 @@ const { errorResponse, successResponse } = require("../../util/response/response
 const router = require("express").Router();
 const qs = require('qs');
 
-// Create Issue API
+// Create Topic API
 router.post('/zulip',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
     if ((!request.body.message) && (!request.body.description) && (!request.body.id)) {

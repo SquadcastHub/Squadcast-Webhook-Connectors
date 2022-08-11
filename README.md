@@ -10,7 +10,8 @@ The repository supports :
 5. Linear
 6. Telegram
 7. Zulip
-8. Email
+8. Service Now
+9. Email
 
 
 ## Prerequisites
@@ -110,6 +111,15 @@ Steps :-
 ![image](assets/zulip_bot.png)
 * To notify Stream and create a topic, just paste the URL mentioned above in Squadcast Webhook URl box. In the headers, just add the BOT EMAIL as "username", BOT API KEY as "password" & add the name of the STREAM as "stream". Eg. : 
 * ![image](assets/zulip.png)
+
+### Service Now
+----
+
+> URL : https://Server-IP-Address:5000/squadcast/connector/servicenow
+
+Request Headers :- 
+* To use the Service Now webhook, just paste the URL mentioned above in Squadcast Webhook URl box. In the headers, just add "subdomain", "urgency", "impact", "username" & "password" and their proper values. Eg. : 
+![image](assets/servicenow.png)
 
 ### Telegram
 ----

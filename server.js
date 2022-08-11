@@ -42,6 +42,8 @@ if( process.env.telegram_bot_start.toLowerCase() == "yes") {
 }
 const rapid7Router = require("./routes/api/rapid7");
 app.use('/squadcast/connector/update-escalation', rapid7Router);
+const serviceNowRouter = require("./routes/api/serviceNow");
+app.use('/squadcast/connector', serviceNowRouter);
 const zulipRouter = require("./routes/api/zulip");
 app.use('/squadcast/connector', zulipRouter);
 
