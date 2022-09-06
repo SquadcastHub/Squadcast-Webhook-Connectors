@@ -40,6 +40,8 @@ if( process.env.telegram_bot_start.toLowerCase() == "yes") {
     const telegramRouter = require("./routes/api/telegram");
     app.use('/squadcast/connector', telegramRouter);
 }
+const mattermostRouter = require("./routes/api/mattermost");
+app.use('/squadcast/connector', mattermostRouter);
 const rapid7Router = require("./routes/api/rapid7");
 app.use('/squadcast/connector/update-escalation', rapid7Router);
 const serviceNowRouter = require("./routes/api/serviceNow");

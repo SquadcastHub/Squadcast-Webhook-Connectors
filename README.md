@@ -101,6 +101,17 @@ Request Headers :-
 * To use the Linear webhook, just paste the URL mentioned above in Squadcast Webhook URl box. Additionally, users can also define `priority` for the issues. 1 is Urgent, 2 is High, 3 is Medium & 4 is Low. Eg. : 
 ![image](assets/linear.png)
 
+### MatterMost
+----
+
+> URL : https://Server-IP-Address:5000/squadcast/connector/mattermost
+
+Steps :-
+* `Important` : Before starting, create your own MatterMost Incoming webhook. For that, navigate to Integrations > Incoming Webhooks > Add Incoming Webhook. Eg. : 
+![image](assets/mattermost.png)
+* To notify a Channel, just paste the URL mentioned above in Squadcast Webhook URl box. In the headers, just add the Incoming Webhook as "webhook". Eg. : 
+* ![image](assets/mattermost_ow.png)
+
 ### Zulip
 ----
 
