@@ -9,9 +9,10 @@ The repository supports :
 4. Click Up
 5. Linear
 6. Telegram
-7. Zulip
-8. Service Now
-9. Email
+7. MatterMost
+8. Zulip
+9. Service Now
+10. Email
 
 
 ## Prerequisites
