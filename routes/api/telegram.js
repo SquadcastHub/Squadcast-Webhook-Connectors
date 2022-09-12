@@ -17,11 +17,15 @@ router.post('/telegram',authV1.auth, async (request, response) => {
         logger.error("Bad Request, Message, Description or id not found");
         return response.status(400).json(errorResponse("Bad Request, Message, Description or id not found"));
     }
-    if ((!request.header("chatId")) && (!request.header("token"))) {
+    if ((!process.env.chatId)) && (!request.header("Authorization"))) {
         logger.error("Bad Request, chatId or token Not Found");
         return response.status(400).json(errorResponse("Bad Request, chatId or token Not Found"));
     }
-    bot.sendMessage(request.header("chatId"), 
+    if (request.header("Authorization") != `Bearer ${process.env.telegram_bot_token}`) {
+        logger.error(`Access denied[token: ${request.header("Authorization")}]`);
+        return response.status(403).json(errorResponse("Access denied"));
+    }
+    bot.sendMessage(process.env.chatId, 
         "Incident Name : " + request.body.message + "\n\n" + "Incident State : " + request.body.status + "\n\n" 
         + "Description : " + request.body.description + "\n\n" 
         + "Incident Link : " + "https://app.squadcast.com/incident/"+request.body.id)
