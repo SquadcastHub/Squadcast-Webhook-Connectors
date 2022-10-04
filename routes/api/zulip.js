@@ -21,12 +21,15 @@ router.post('/zulip',authV1.auth, async (request, response) => {
         logger.error("Bad Request, Stream/username/password information not found");
         return response.status(400).json(errorResponse("Bad Request, Stream information not found"));
     }
+    let incidentURL = "https://app.squadcast.com/incident/"+request.body.id
     // Send a Stream message
     let data = qs.stringify({
         'type': 'stream',
         'to': request.header("stream"),
         'topic': request.body.id,
-        'content': "**"+request.body.message+"**" 
+        'content': "[#"+request.body.id+"]("+incidentURL+")"
+                    +"\n\n"+request.body.message
+                    + "\n\n"+"**Incident Status : **"+request.body.status
                     + "\n\n"+"**Incident Description :-** \n" 
                     + request.body.description
       });
