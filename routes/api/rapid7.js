@@ -11,7 +11,7 @@ const router = require("express").Router();
 // Change Escalation Policy API
 router.post('/rapid7',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
-    if ((!request.body.message) && (!request.body.description) && (!request.body.status)) {
+    if ((!request.body.data.resource_data.message) && (!request.body.data.resource_data.description) && (!request.body.data.resource_data.status)) {
         logger.error("Bad Request, Message, Description or id not found");
         return response.status(400).json(errorResponse("Bad Request, Message, Description or id not found"));
     }
@@ -22,7 +22,7 @@ router.post('/rapid7',authV1.auth, async (request, response) => {
     var token = "";
     await axios({
       method: 'get',
-      url: "https://"+request.header("region")+".api.insight.rapid7.com/idr/v2/investigations/"+request.body.event_payload.investigationId,
+      url: "https://"+request.header("region")+".api.insight.rapid7.com/idr/v2/investigations/"+request.body.data.resource_data.event_payload.investigationId,
       headers:{
         "Accept-version" : "investigations-preview",
         "X-Api-Key" : request.header("x-api-key")
@@ -48,7 +48,7 @@ router.post('/rapid7',authV1.auth, async (request, response) => {
                 token = resp.data.data.access_token;
                 axios({
                     method: 'put',
-                    url: "https://api.squadcast.com/v3/incidents/"+request.body.id+"/tags",
+                    url: "https://api.squadcast.com/v3/incidents/"+request.body.data.resource_data.id+"/tags",
                     headers: {"Authorization" : `Bearer ${token}`},
                     data: {
                         "tags": {
@@ -62,7 +62,7 @@ router.post('/rapid7',authV1.auth, async (request, response) => {
                     .then((responseData) => {
                         axios({
                             method: 'post',
-                            url: "https://platform-backend.squadcast.com/v2/organizations/"+request.body.organization.id+"/incidents/"+request.body.id+"/reassign",
+                            url: "https://platform-backend.squadcast.com/v2/organizations/"+request.body.data.organization.id+"/incidents/"+request.body.data.resource_data.id+"/reassign",
                             headers: {"Authorization" : `Bearer ${token}`},
                             data: {
                                 "reassignTo": {

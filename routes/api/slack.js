@@ -11,7 +11,7 @@ const router = require("express").Router();
 // Slack channel API
 router.post('/slack',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
-    if ((!request.body.message) && (!request.body.description) && (!request.body.status) && (!request.body.id)) {
+    if ((!request.body.data.resource_data.message) && (!request.body.data.resource_data.description) && (!request.body.data.resource_data.status) && (!request.body.data.resource_data.id)) {
         logger.error("Bad Request, Message, Description, Status or id not found");
         return response.status(400).json(errorResponse("Bad Request, Message, Description, Status or id not found"));
     }
@@ -22,28 +22,28 @@ router.post('/slack',authV1.auth, async (request, response) => {
     var count = 1;
     var resp = "";
     var title = "";
-    if (request.body.event_type == "incident_resolved") {
-        title = "<" + "https://app.squadcast.com/incident/" + request.body.id + "|*Resolved #" + request.body.id + "*>\n"
+    if (request.body.event.type == "incident.resolved") {
+        title = "<" + request.body.data.resource_data.url + "|*Resolved #" + request.body.data.resource_data.id + "*>\n"
     }
-    else if (request.body.event_type == "incident_reassigned") {
-        title = "<" + "https://app.squadcast.com/incident/" + request.body.id + "|*Reassigned #" + request.body.id + "*>\n"
+    else if (request.body.event.type == "incident.reassigned") {
+        title = "<" + request.body.data.resource_data.url + "|*Reassigned #" + request.body.data.resource_data.id + "*>\n"
     }
-    else if (request.body.event_type == "incident_acknowledged") {
-        title = "<" + "https://app.squadcast.com/incident/" + request.body.id + "|*Acknowledged #" + request.body.id + "*>\n"
+    else if (request.body.event.type == "incident.acknowledged") {
+        title = "<" + request.body.data.resource_data.url + "|*Acknowledged #" + request.body.data.resource_data.id + "*>\n"
     }
-    else if (request.body.event_type == "incident_triggered") {
-        title = "<" + "https://app.squadcast.com/incident/" + request.body.id + "|*Triggered #" + request.body.id + "*>\n"
+    else if (request.body.event.type == "incident.triggered") {
+        title = "<" + request.body.data.resource_data.url + "|*Triggered #" + request.body.data.resource_data.id + "*>\n"
     }
     while(true){
         currenturl = request.header(count.toString());
         if (currenturl !== undefined) {
             var slackData = { "text" : "\n-------------------------------------\n" 
                 + title
-                + "*Incident Name* : " + request.body.message 
-                + "\n" + "*Incident State* : " + request.body.status + "\n" 
-                + "*Service Name* : " + request.body.service.name + "\n"
-                + "*Alert soure* : " + request.body.alert_source.type + "\n\n"
-                + "*Description* : " + request.body.description + "\n" 
+                + "*Incident Name* : " + request.body.data.resource_data.message 
+                + "\n" + "*Incident State* : " + request.body.data.resource_data.status + "\n" 
+                + "*Service Name* : " + request.body.data.resource_data.service.name + "\n"
+                + "*Alert Source* : " + request.body.data.resource_data.alert_source.type + "\n\n"
+                + "*Description* : " + request.body.data.resource_data.description + "\n" 
                 + "\n-------------------------------------\n"}
             await axios({
                 method: 'post',

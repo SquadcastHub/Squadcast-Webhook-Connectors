@@ -12,7 +12,7 @@ var nodemailer = require('nodemailer');
 // Email API
 router.post('/email',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
-    if ((!request.body.message) && (!request.body.description) && (!request.body.status)) {
+    if ((!request.body.data.resource_data.message) && (!request.body.data.resource_data.description) && (!request.body.data.resource_data.status)) {
         logger.error("Bad Request, Message, Description or id not found");
         return response.status(400).json(errorResponse("Bad Request, Message, Description or id not found"));
     }
@@ -34,8 +34,8 @@ router.post('/email',authV1.auth, async (request, response) => {
     var mailOptions = {
         from: from_email,
         to: to_email,
-        subject: "Incident : " + request.body.message + " is " + request.body.status,
-        text: request.body.description
+        subject: "Incident : " + request.body.data.resource_data.message + " is " + request.body.data.resource_data.status,
+        text: request.body.data.resource_data.description
       };
       
     transporter.sendMail(mailOptions, function(error, info){

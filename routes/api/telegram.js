@@ -13,7 +13,7 @@ const bot = new TelegramBot(process.env.telegram_bot_token, {polling: true});
 // Telegram Bot API
 router.post('/telegram',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
-    if ((!request.body.message) && (!request.body.description) && (!request.body.status)) {
+    if ((!request.body.data.resource_data.message) && (!request.body.data.resource_data.description) && (!request.body.data.resource_data.status)) {
         logger.error("Bad Request, Message, Description or id not found");
         return response.status(400).json(errorResponse("Bad Request, Message, Description or id not found"));
     }
@@ -22,9 +22,9 @@ router.post('/telegram',authV1.auth, async (request, response) => {
         return response.status(400).json(errorResponse("Bad Request, chatId or token Not Found"));
     }
     bot.sendMessage(request.header("chatId"), 
-        "Incident Name : " + request.body.message + "\n\n" + "Incident State : " + request.body.status + "\n\n" 
-        + "Description : " + request.body.description + "\n\n" 
-        + "Incident Link : " + "https://app.squadcast.com/incident/"+request.body.id)
+        "Incident Name : " + request.body.data.resource_data.message + "\n\n" + "Incident State : " + request.body.data.resource_data.status + "\n\n" 
+        + "Description : " + request.body.data.resource_data.description + "\n\n" 
+        + "Incident Link : " + request.body.data.resource_data.url)
     .then((res) => {
         //HANDLE SUCCESS
         logger.info("Returned Response - Telegram Bot - Message Sent");
