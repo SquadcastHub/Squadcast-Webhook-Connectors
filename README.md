@@ -1,7 +1,7 @@
 ![image](assets/SQ.svg)
 # Squadcast Webhook Connectors
 
-This repository contains the code for the Squadcast Webhook Connectors and is intended to be used along with Event Hooks.
+This repository contains the code for the Squadcast Webhook Connectors and is intended to be used along with Webhooks V1.
 The repository supports : 
 1. Slack
 2. Discord
