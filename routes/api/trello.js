@@ -11,7 +11,7 @@ const router = require("express").Router();
 // Create Card API
 router.post('/trello',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
-    if ((!request.body.message) && (!request.body.description) && (!request.body.status)) {
+    if ((!request.body.data.resource_data.message) && (!request.body.data.resource_data.description) && (!request.body.data.resource_data.status)) {
         logger.error("Bad Request, Message, Description or id not found");
         return response.status(400).json(errorResponse("Bad Request, Message, Description or id not found"));
     }
@@ -26,8 +26,8 @@ router.post('/trello',authV1.auth, async (request, response) => {
         idList : request.header("idList"),
         key : request.header("key"),
         token : request.header("token"),
-        name : request.body.message,
-        desc : request.body.description
+        name : request.body.data.resource_data.message,
+        desc : request.body.data.resource_data.description
       }
       })
       .then((res) => {

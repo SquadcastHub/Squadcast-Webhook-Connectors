@@ -19,7 +19,7 @@ const router = require("express").Router();
 // Create Issue API
 router.post('/linear',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
-    if ((!request.body.message) && (!request.body.description) && (!request.body.id)) {
+    if ((!request.body.data.resource_data.message) && (!request.body.data.resource_data.description) && (!request.body.data.resource_data.id)) {
         logger.error("Bad Request, Message, Description or id not found");
         return response.status(400).json(errorResponse("Bad Request, Message, Description or id not found"));
     }
@@ -35,7 +35,7 @@ router.post('/linear',authV1.auth, async (request, response) => {
     const teams = await client1.teams();
     const team = teams.nodes[0];
     if (team.id) {
-        await client1.issueCreate({ teamId: team.id, title: request.body.message, description: request.body.description, priority: priority })
+        await client1.issueCreate({ teamId: team.id, title: request.body.data.resource_data.message, description: request.body.data.resource_data.description, priority: priority })
         .then((res) => {
             //HANDLE SUCCESS
             logger.info("Returned Response - Linear - Issue created");

@@ -11,7 +11,7 @@ const router = require("express").Router();
 // Create TASK API
 router.post('/clickup',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
-    if ((!request.body.message) && (!request.body.description) && (!request.body.id)) {
+    if ((!request.body.data.resource_data.message) && (!request.body.data.resource_data.description) && (!request.body.data.resource_data.id)) {
         logger.error("Bad Request, Message, Description or id not found");
         return response.status(400).json(errorResponse("Bad Request, Message, Description or id not found"));
     }
@@ -28,8 +28,8 @@ router.post('/clickup',authV1.auth, async (request, response) => {
         'Content-Type': 'application/json'
       },
       data: {
-            "name": request.body.message,
-            "description": request.body.description +"\n"+ "Incident Link : " + "https://app.squadcast.com/incident/" + request.body.id,
+            "name": request.body.data.resource_data.message,
+            "description": request.body.data.resource_data.description +"\n"+ "Incident Link : " + request.body.data.resource_data.url,
             "assignees": [
             ],
             "tags": [],

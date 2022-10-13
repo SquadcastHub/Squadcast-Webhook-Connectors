@@ -11,7 +11,7 @@ const router = require("express").Router();
 // Discord channel API
 router.post('/discord',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
-    if ((!request.body.message) && (!request.body.description) && (!request.body.status) && (!request.body.id)) {
+    if ((!request.body.data.resource_data.message) && (!request.body.data.resource_data.description) && (!request.body.data.resource_data.status) && (!request.body.data.resource_data.id)) {
         logger.error("Bad Request, Message, Description, Status or id not found");
         return response.status(400).json(errorResponse("Bad Request, Message, Description, Status or id not found"));
     }
@@ -21,21 +21,21 @@ router.post('/discord',authV1.auth, async (request, response) => {
     }
     var count = 1;
     var resp = title = color = "";
-    url = "https://app.squadcast.com/incident/" + request.body.id
-    if (request.body.event_type == "incident_resolved") {
-        title = "**Resolved **"+"[**#"+request.body.id+"**]("+url+")\n";
+    url = request.body.data.resource_data.url;
+    if (request.body.event.type == "incident.resolved") {
+        title = "**Resolved **"+"[**#"+request.body.data.resource_data.id+"**]("+url+")\n";
         color = "2219410";
     }
-    else if (request.body.event_type == "incident_reassigned") {
-        title = "**Reassigned **"+"[**#"+request.body.id+"**]("+url+")\n";
+    else if (request.body.event.type == "incident.reassigned") {
+        title = "**Reassigned **"+"[**#"+request.body.data.resource_data.id+"**]("+url+")\n";
         color = "10027238";
     }
-    else if (request.body.event_type == "incident_acknowledged") {
-        title = "**Acknowledged **"+"[**#"+request.body.id+"**]("+url+")\n";
+    else if (request.body.event.type == "incident.acknowledged") {
+        title = "**Acknowledged **"+"[**#"+request.body.data.resource_data.id+"**]("+url+")\n";
         color = "14804480";
     }
-    else if (request.body.event_type == "incident_triggered") {
-        title = "**Triggered **"+"[**#"+request.body.id+"**]("+url+")\n";
+    else if (request.body.event.type == "incident.triggered") {
+        title = "**Triggered **"+"[**#"+request.body.data.resource_data.id+"**]("+url+")\n";
         color = "10027238";
     }
     while(true){
@@ -44,11 +44,11 @@ router.post('/discord',authV1.auth, async (request, response) => {
             var discordData = {
                 "embeds": [{
                   "color" : color,
-                  "description": (title+request.body.message).replace(/\n+/g, "\n")
-                  +"\n\n**Incident State** : " + request.body.status + "\n" 
-                  + "**Service Name** : " + request.body.service.name + "\n"
-                  + "**Alert soure** : " + request.body.alert_source.type + "\n\n"
-                  + "**Description** : " + request.body.description + "\n"
+                  "description": (title+request.body.data.resource_data.message).replace(/\n+/g, "\n")
+                  +"\n\n**Incident State** : " + request.body.data.resource_data.status + "\n" 
+                  + "**Service Name** : " + request.body.data.resource_data.service.name + "\n"
+                  + "**Alert Source** : " + request.body.data.resource_data.alert_source.type + "\n\n"
+                  + "**Description** : " + request.body.data.resource_data.description + "\n"
                 }]
             }
             await axios({

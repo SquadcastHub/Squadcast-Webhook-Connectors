@@ -11,7 +11,7 @@ const router = require("express").Router();
 // Create Incident API
 router.post('/servicenow',authV1.auth, async (request, response) => {
     //HANDLE BAD REQUEST
-    if ((!request.body.message) && (!request.body.description) && (!request.body.id)) {
+    if ((!request.body.data.resource_data.message) && (!request.body.data.resource_data.description) && (!request.body.data.resource_data.id)) {
         logger.error("Bad Request, Message, Description or id not found");
         return response.status(400).json(errorResponse("Bad Request, Message, Description or id not found"));
     }
@@ -24,9 +24,9 @@ router.post('/servicenow',authV1.auth, async (request, response) => {
       incidentData = {
         'urgency': request.header("urgency"),
         'impact': request.header("impact"),
-        'short_description': "**"+request.body.message+"**" 
+        'short_description': "**"+request.body.data.resource_data.message+"**" 
                     + "\n\n"+"**Incident Description :-** \n" 
-                    + request.body.description
+                    + request.body.data.resource_data.description
       };
     } 
     else {
@@ -34,9 +34,11 @@ router.post('/servicenow',authV1.auth, async (request, response) => {
         'assignment_group': request.header("assignment_group"),
         'urgency': request.header("urgency"),
         'impact': request.header("impact"),
-        'short_description': "**"+request.body.message+"**" 
+        'short_description': "**"+request.body.data.resource_data.message+"**" 
                     + "\n\n"+"**Incident Description :-** \n" 
-                    + request.body.description
+                    + request.body.data.resource_data.description
+                    + "\n\n"+"**Incident URL : **"
+                    + request.body.data.resource_data.url
       };
     }
     await axios({
