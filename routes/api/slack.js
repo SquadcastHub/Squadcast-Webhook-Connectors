@@ -42,7 +42,7 @@ router.post('/slack',authV1.auth, async (request, response) => {
                 + "*Incident Name* : " + request.body.message 
                 + "\n" + "*Incident State* : " + request.body.status + "\n" 
                 + "*Service Name* : " + request.body.service.name + "\n"
-                + "*Alert soure* : " + request.body.alert_source.type + "\n\n"
+                + "*Alert Source* : " + request.body.alert_source.type + "\n\n"
                 + "*Description* : " + request.body.description + "\n" 
                 + "\n-------------------------------------\n"}
             await axios({

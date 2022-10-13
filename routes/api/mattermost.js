@@ -31,7 +31,7 @@ router.post('/mattermost',authV1.auth, async (request, response) => {
             +"](https://app.squadcast.com/incident/"+request.body.id
             +")\n"+"\n\n**Incident State** : " + request.body.status + "\n" 
             + "**Service Name** : " + request.body.service.name + "\n"
-            + "**Alert soure** : " + request.body.alert_source.type + "\n\n"
+            + "**Alert Source** : " + request.body.alert_source.type + "\n\n"
             + "**Description** :-\n" + request.body.description + "\n"
         }
         })

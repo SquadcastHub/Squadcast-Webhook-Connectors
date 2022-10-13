@@ -47,7 +47,7 @@ router.post('/discord',authV1.auth, async (request, response) => {
                   "description": (title+request.body.message).replace(/\n+/g, "\n")
                   +"\n\n**Incident State** : " + request.body.status + "\n" 
                   + "**Service Name** : " + request.body.service.name + "\n"
-                  + "**Alert soure** : " + request.body.alert_source.type + "\n\n"
+                  + "**Alert Source** : " + request.body.alert_source.type + "\n\n"
                   + "**Description** : " + request.body.description + "\n"
                 }]
             }
