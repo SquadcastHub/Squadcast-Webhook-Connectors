@@ -48,6 +48,8 @@ const serviceNowRouter = require("./routes/api/serviceNow");
 app.use('/squadcast/connector', serviceNowRouter);
 const zulipRouter = require("./routes/api/zulip");
 app.use('/squadcast/connector', zulipRouter);
+const updatetag = require("./routes/api/updatetag");
+app.use('/squadcast/connector', updatetag);
 
 // HTTPS SERVER
 const port = process.env.PORT;
