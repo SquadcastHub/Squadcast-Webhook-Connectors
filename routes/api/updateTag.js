@@ -23,11 +23,11 @@ router.post('/updateTag', authV1.auth, async (request, response) => {
       .status(400)
       .json(errorResponse('Bad Request, Message, Description or id not found'))
   }
-  if (!request.header('X-REFRESH-TOKEN')) {
-    logger.error('Bad Request, X-REFRESH-TOKEN Not Found')
+  if (!request.header('x-refresh-token')) {
+    logger.error('Bad Request, x-refresh-token Not Found')
     return response
       .status(400)
-      .json(errorResponse('Bad Request, X-REFRESH-TOKEN Not Found'))
+      .json(errorResponse('Bad Request, x-refresh-token Not Found'))
   }
   let message1=request.body.data.resource_data.message
   let temp_tag =message1.split("Ticket #")[1].split(":")[0]
@@ -39,12 +39,18 @@ router.post('/updateTag', authV1.auth, async (request, response) => {
       }
     }
   })
-  let url=process.env.updateTag123 +request.body.data.resource_data.id +'/tags'
+  let apiUrl="https://api.squadcast.com/v3/incidents/"
+  let authApiUrl = "https://auth.squadcast.com/oauth/access-token"
+  if(!request.body.data.resource_data.url.includes("app.squadcast.com")){
+    apiUrl="https://api.eu.squadcast.com/v3/incidents/"
+    authApiUrl="https://auth.eu.squadcast.com/oauth/access-token"
+  }
+  let url=apiUrl +request.body.data.resource_data.id +'/tags'
   let config = {
     method: 'get',
-    url: 'https://auth.squadcast.com/oauth/access-token',
+    url: authApiUrl,
     headers: {
-      'X-Refresh-Token': request.header('X-REFRESH-TOKEN'),
+      'X-Refresh-Token': request.header('x-refresh-token'),
     },
   }
   const barer_token = await axios(config)

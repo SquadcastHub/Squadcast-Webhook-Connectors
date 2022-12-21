@@ -228,3 +228,14 @@ Request Headers :-
 ![image](assets/rapid7-insightidr.png)
 
 * Tip : To get you own "x-api-key", go to Settings > API Keys > User Key > New User Key 
+
+### Update Tag
+----
+
+> URL : https://Server-IP-Address:5000/squadcast/connector/updatetag
+
+Request Headers :- 
+* This API will update incident tag if incident title includes Ticket # followed by number. i.e. if incident title is: Updated test Ticket #221208-01805: TRI-ALT:Critical:Pure then incident will be tagged as ticket:221208-01805
+![image](assets/updatetag01.png)
+* Please send "x-refresh-token" in outgoing webhook headers.
+![image](assets/updatetag02.png)
