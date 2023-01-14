@@ -12,7 +12,6 @@ addEventListener("fetch", event => {
 async function handleRequest(request) {
   let pathname = new URL(request.url).pathname
   // return new Response(pathname)
-  console.log("wefwerwergrg");
   let reqBody;
   if(pathname == "/updateTag"){
     reqBody = await email(request)
