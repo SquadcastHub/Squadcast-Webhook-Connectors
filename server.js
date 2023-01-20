@@ -50,6 +50,8 @@ const zulipRouter = require("./routes/api/zulip");
 app.use('/squadcast/connector', zulipRouter);
 const updatetag = require("./routes/api/updatetag");
 app.use('/squadcast/connector', updatetag);
+const autoack = require("./routes/api/autoAck");
+app.use('/squadcast/connector', autoack);
 
 // HTTPS SERVER
 const port = process.env.PORT;
