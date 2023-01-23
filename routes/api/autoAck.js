@@ -55,7 +55,6 @@ router.post('/autoAck', authV1.auth, async (request, response) => {
       apiUrl = 'https://api.eu.squadcast.com/v3/incidents/'
       authApiUrl = 'https://auth.eu.squadcast.com/oauth/access-token'
     }
-    let url = apiUrl + request.body.data.resource_data.id + '/tags'
     let config = {
       method: 'get',
       url: authApiUrl,
