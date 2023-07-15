@@ -50,8 +50,8 @@ const serviceNowRouter = require("./routes/api/serviceNow");
 app.use('/squadcast/connector', serviceNowRouter);
 const zulipRouter = require("./routes/api/zulip");
 app.use('/squadcast/connector', zulipRouter);
-const updatetag = require("./routes/api/updatetag");
-app.use('/squadcast/connector', updatetag);
+const updateTag = require("./routes/api/updateTag");
+app.use('/squadcast/connector', updateTag);
 const autoack = require("./routes/api/autoAck");
 app.use('/squadcast/connector', autoack);
 
